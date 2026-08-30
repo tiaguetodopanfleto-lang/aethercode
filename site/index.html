@@ -55,10 +55,6 @@ button{
     display:none!important;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
-
 *::-webkit-scrollbar{
     width:6px;
     height:6px;
@@ -1301,9 +1297,9 @@ button{
 
 <body>
 
-<!-- =====================================================
+<!-- =========================
      LOGIN
-===================================================== -->
+========================= -->
 
 <section id="auth">
 
@@ -1393,9 +1389,9 @@ button{
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      APP
-===================================================== -->
+========================= -->
 
 <section id="app" class="hidden">
 
@@ -1643,9 +1639,9 @@ button{
 
 </section>
 
-<!-- =====================================================
+<!-- =========================
      PLANOS
-===================================================== -->
+========================= -->
 
 <div
     id="plansModal"
@@ -1772,47 +1768,72 @@ function showToast(message,type=""){
     if(!container)
         return;
 
-    const toast = document.createElement("div");
+    const toast =
+        document.createElement("div");
 
-    toast.className = "toast " + type;
+    toast.className =
+        "toast " + type;
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
     container.appendChild(toast);
 
     setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(8px)";
 
-        setTimeout(() => toast.remove(),250);
+        toast.style.opacity = "0";
+        toast.style.transform =
+            "translateY(8px)";
+
+        setTimeout(
+            () => toast.remove(),
+            250
+        );
+
     },3000);
 }
 
 function showAuthError(message){
 
-    const error = $("authError");
-    const success = $("authSuccess");
+    const error =
+        $("authError");
+
+    const success =
+        $("authSuccess");
 
     if(success)
         success.classList.add("hidden");
 
     if(error){
-        error.textContent = message;
-        error.classList.remove("hidden");
+
+        error.textContent =
+            message;
+
+        error.classList.remove(
+            "hidden"
+        );
     }
 }
 
 function showAuthSuccess(message){
 
-    const error = $("authError");
-    const success = $("authSuccess");
+    const error =
+        $("authError");
+
+    const success =
+        $("authSuccess");
 
     if(error)
         error.classList.add("hidden");
 
     if(success){
-        success.textContent = message;
-        success.classList.remove("hidden");
+
+        success.textContent =
+            message;
+
+        success.classList.remove(
+            "hidden"
+        );
     }
 }
 
@@ -1834,17 +1855,27 @@ function escapeHTML(value){
 
 function setConnectionStatus(online){
 
-    const status = $("connectionStatus");
+    const status =
+        $("connectionStatus");
 
     if(!status)
         return;
 
     if(online){
-        status.classList.remove("offline");
+
+        status.classList.remove(
+            "offline"
+        );
+
         status.innerHTML =
             '<span class="status-dot"></span><span>Online</span>';
+
     }else{
-        status.classList.add("offline");
+
+        status.classList.add(
+            "offline"
+        );
+
         status.innerHTML =
             '<span class="status-dot"></span><span>Offline</span>';
     }
@@ -1864,10 +1895,11 @@ if(cfgOk){
 
     try{
 
-        sb = window.supabase.createClient(
-            C.supabaseUrl,
-            C.supabaseAnonKey
-        );
+        sb =
+            window.supabase.createClient(
+                C.supabaseUrl,
+                C.supabaseAnonKey
+            );
 
     }catch(error){
 
@@ -1918,10 +1950,12 @@ async function login(){
         return;
     }
 
-    const button = $("loginButton");
+    const button =
+        $("loginButton");
 
     button.disabled = true;
-    button.textContent = "Entrando...";
+    button.textContent =
+        "Entrando...";
 
     try{
 
@@ -1934,7 +1968,9 @@ async function login(){
         if(error){
 
             showAuthError(
-                translateAuthError(error.message)
+                translateAuthError(
+                    error.message
+                )
             );
 
             return;
@@ -1950,8 +1986,8 @@ async function login(){
     }finally{
 
         button.disabled = false;
-        button.textContent = "Entrar";
-
+        button.textContent =
+            "Entrar";
     }
 }
 
@@ -1992,10 +2028,12 @@ async function signup(){
         return;
     }
 
-    const button = $("signupButton");
+    const button =
+        $("signupButton");
 
     button.disabled = true;
-    button.textContent = "Criando conta...";
+    button.textContent =
+        "Criando conta...";
 
     try{
 
@@ -2009,13 +2047,14 @@ async function signup(){
                     emailRedirectTo:
                         window.location.origin
                 }
-
             });
 
         if(error){
 
             showAuthError(
-                translateAuthError(error.message)
+                translateAuthError(
+                    error.message
+                )
             );
 
             return;
@@ -2032,7 +2071,6 @@ async function signup(){
             showAuthSuccess(
                 "Conta criada! Confira seu e-mail para confirmar a conta."
             );
-
         }
 
     }catch(error){
@@ -2045,8 +2083,8 @@ async function signup(){
     }finally{
 
         button.disabled = false;
-        button.textContent = "Criar conta";
-
+        button.textContent =
+            "Criar conta";
     }
 }
 
@@ -2074,15 +2112,15 @@ async function oauth(provider){
                     redirectTo:
                         window.location.origin
                 }
-
             });
 
         if(error){
 
             showAuthError(
-                translateAuthError(error.message)
+                translateAuthError(
+                    error.message
+                )
             );
-
         }
 
     }catch(error){
@@ -2091,7 +2129,6 @@ async function oauth(provider){
             error.message ||
             "Erro ao entrar."
         );
-
     }
 }
 
@@ -2134,7 +2171,9 @@ async function resetPassword(){
         if(error){
 
             showAuthError(
-                translateAuthError(error.message)
+                translateAuthError(
+                    error.message
+                )
             );
 
             return;
@@ -2150,29 +2189,40 @@ async function resetPassword(){
             error.message ||
             "Erro ao solicitar recuperação."
         );
-
     }
 }
 
 function translateAuthError(message){
 
-    const text = String(message || "");
+    const text =
+        String(message || "");
 
-    const lower = text.toLowerCase();
+    const lower =
+        text.toLowerCase();
 
-    if(lower.includes("invalid login credentials"))
+    if(lower.includes(
+        "invalid login credentials"
+    ))
         return "E-mail ou senha incorretos.";
 
-    if(lower.includes("email not confirmed"))
+    if(lower.includes(
+        "email not confirmed"
+    ))
         return "Confirme seu e-mail antes de entrar.";
 
-    if(lower.includes("user already registered"))
+    if(lower.includes(
+        "user already registered"
+    ))
         return "Esse e-mail já possui uma conta.";
 
-    if(lower.includes("password should be at least"))
+    if(lower.includes(
+        "password should be at least"
+    ))
         return "A senha precisa ter pelo menos 6 caracteres.";
 
-    if(lower.includes("rate limit"))
+    if(lower.includes(
+        "rate limit"
+    ))
         return "Muitas tentativas. Aguarde um pouco e tente novamente.";
 
     return text;
@@ -2186,8 +2236,11 @@ async function logout(){
         return;
 
     try{
+
         await sb.auth.signOut();
+
     }catch(error){
+
         console.error(error);
     }
 }
@@ -2212,7 +2265,6 @@ async function boot(){
         if(session){
 
             await enter();
-
         }
 
     }catch(error){
@@ -2221,11 +2273,10 @@ async function boot(){
             "Erro ao recuperar sessão:",
             error
         );
-
     }
 
     sb.auth.onAuthStateChange(
-        async (_event,newSession)=>{
+        async (_event,newSession) => {
 
             session =
                 newSession || null;
@@ -2236,14 +2287,17 @@ async function boot(){
 
             }else{
 
-                $("app").classList.add("hidden");
-                $("auth").classList.remove("hidden");
+                $("app")
+                    .classList
+                    .add("hidden");
+
+                $("auth")
+                    .classList
+                    .remove("hidden");
 
                 currentId = null;
                 history = [];
-
             }
-
         }
     );
 }
@@ -2256,10 +2310,17 @@ function isOwner(){
     if(!email)
         return false;
 
-    return Array.isArray(C.ownerEmails) &&
+    return Array.isArray(
         C.ownerEmails
-            .map(x => String(x).toLowerCase())
-            .includes(email.toLowerCase());
+    ) &&
+    C.ownerEmails
+        .map(
+            x =>
+                String(x).toLowerCase()
+        )
+        .includes(
+            email.toLowerCase()
+        );
 }
 
 async function enter(){
@@ -2271,19 +2332,28 @@ async function enter(){
 
     try{
 
-        $("auth").classList.add("hidden");
-        $("app").classList.remove("hidden");
+        $("auth")
+            .classList
+            .add("hidden");
+
+        $("app")
+            .classList
+            .remove("hidden");
 
         const email =
             session?.user?.email || "";
 
-        $("userEmail").textContent =
+        $("userEmail")
+            .textContent =
             email;
 
-        $("userAvatar").textContent =
-            email.charAt(0).toUpperCase() || "A";
+        $("userAvatar")
+            .textContent =
+            email.charAt(0)
+                .toUpperCase() || "A";
 
-        $("userPlan").textContent =
+        $("userPlan")
+            .textContent =
             isOwner()
                 ? "Plano: Dono"
                 : "Plano: Free";
@@ -2293,7 +2363,6 @@ async function enter(){
     }finally{
 
         enteringApp = false;
-
     }
 }
 
@@ -2306,7 +2375,8 @@ async function loadConversations(){
     if(!sb || !session)
         return;
 
-    const list = $("conversations");
+    const list =
+        $("conversations");
 
     if(!list)
         return;
@@ -2340,7 +2410,9 @@ async function loadConversations(){
 
     list.innerHTML = "";
 
-    for(const conversation of data || []){
+    for(
+        const conversation of data || []
+    ){
 
         const item =
             document.createElement("div");
@@ -2348,7 +2420,8 @@ async function loadConversations(){
         item.className =
             "conversation " +
             (
-                currentId === conversation.id
+                currentId ===
+                conversation.id
                     ? "active"
                     : ""
             );
@@ -2395,7 +2468,6 @@ async function loadConversations(){
                 $("sidebar")
                     ?.classList
                     .remove("open");
-
             }
         );
 
@@ -2410,7 +2482,6 @@ async function loadConversations(){
                 await deleteConversation(
                     conversation.id
                 );
-
             }
         );
 
@@ -2418,7 +2489,9 @@ async function loadConversations(){
     }
 }
 
-async function loadConversation(conversation){
+async function loadConversation(
+    conversation
+){
 
     stopGeneration();
 
@@ -2426,7 +2499,9 @@ async function loadConversation(conversation){
         conversation.id;
 
     history =
-        Array.isArray(conversation.messages)
+        Array.isArray(
+            conversation.messages
+        )
             ? conversation.messages
             : [];
 
@@ -2442,7 +2517,9 @@ async function loadConversation(conversation){
 
     }else{
 
-        for(const message of history){
+        for(
+            const message of history
+        ){
 
             addMessage(
                 message.role === "assistant"
@@ -2451,7 +2528,6 @@ async function loadConversation(conversation){
                 message.content || "",
                 message.attachments || []
             );
-
         }
     }
 
@@ -2500,7 +2576,6 @@ async function deleteConversation(id){
         history = [];
 
         showWelcome();
-
     }
 
     await loadConversations();
@@ -2547,7 +2622,6 @@ async function saveChat(){
 
         updated_at:
             new Date().toISOString()
-
     };
 
     try{
@@ -2619,6 +2693,7 @@ function newChat(){
     showWelcome();
 
     $("input").value = "";
+
     autoResize();
 
     $("input").focus();
@@ -2696,7 +2771,7 @@ function useSuggestion(text){
 }
 
 /* =====================================================
-   MARKDOWN / CODE
+   MARKDOWN
 ===================================================== */
 
 function formatText(text){
@@ -2776,7 +2851,9 @@ function formatText(text){
             "<br>"
         );
 
-    for(const block of blocks){
+    for(
+        const block of blocks
+    ){
 
         const html = `
 
@@ -2785,7 +2862,9 @@ function formatText(text){
                 <div class="code-header">
 
                     <span>
-                        ${escapeHTML(block.language)}
+                        ${escapeHTML(
+                            block.language
+                        )}
                     </span>
 
                     <button
@@ -2832,7 +2911,9 @@ function addMessage(
 
     let attachmentHTML = "";
 
-    for(const file of attachments || []){
+    for(
+        const file of attachments || []
+    ){
 
         if(
             file.type?.startsWith("image/") &&
@@ -2865,7 +2946,8 @@ function addMessage(
 
                         <div class="attachment-name">
                             ${escapeHTML(
-                                file.name || "Arquivo"
+                                file.name ||
+                                "Arquivo"
                             )}
                         </div>
 
@@ -2918,16 +3000,20 @@ function addMessage(
                         button.dataset.codeId;
 
                     const pre =
-                        document.getElementById(id);
+                        document.getElementById(
+                            id
+                        );
 
                     if(!pre)
                         return;
 
                     try{
 
-                        await navigator.clipboard.writeText(
-                            pre.textContent
-                        );
+                        await navigator
+                            .clipboard
+                            .writeText(
+                                pre.textContent
+                            );
 
                         const old =
                             button.textContent;
@@ -2949,7 +3035,6 @@ function addMessage(
                             "Não foi possível copiar.",
                             "error"
                         );
-
                     }
                 }
             );
@@ -3012,12 +3097,13 @@ function scrollChat(){
     if(!chat)
         return;
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame(
+        () => {
 
-        chat.scrollTop =
-            chat.scrollHeight;
-
-    });
+            chat.scrollTop =
+                chat.scrollHeight;
+        }
+    );
 }
 
 /* =====================================================
@@ -3048,19 +3134,20 @@ function readAsText(file){
                 new FileReader();
 
             reader.onload =
-                () => resolve(
-                    String(
-                        reader.result || ""
-                    )
-                );
+                () =>
+                    resolve(
+                        String(
+                            reader.result || ""
+                        )
+                    );
 
             reader.onerror =
-                () => reject(
-                    reader.error
-                );
+                () =>
+                    reject(
+                        reader.error
+                    );
 
             reader.readAsText(file);
-
         }
     );
 }
@@ -3074,17 +3161,18 @@ function readAsDataURL(file){
                 new FileReader();
 
             reader.onload =
-                () => resolve(
-                    reader.result
-                );
+                () =>
+                    resolve(
+                        reader.result
+                    );
 
             reader.onerror =
-                () => reject(
-                    reader.error
-                );
+                () =>
+                    reject(
+                        reader.error
+                    );
 
             reader.readAsDataURL(file);
-
         }
     );
 }
@@ -3114,8 +3202,9 @@ async function prepareFile(file){
             file.size,
 
         sizeText:
-            formatSize(file.size)
-
+            formatSize(
+                file.size
+            )
     };
 
     if(
@@ -3130,7 +3219,6 @@ async function prepareFile(file){
 
         base.text =
             await readAsText(file);
-
     }
 
     return base;
@@ -3140,6 +3228,9 @@ function renderSelectedFiles(){
 
     const area =
         $("fileList");
+
+    if(!area)
+        return;
 
     area.innerHTML = "";
 
@@ -3160,7 +3251,9 @@ function renderSelectedFiles(){
         (file,index) => {
 
             const chip =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             chip.className =
                 "file-chip";
@@ -3169,14 +3262,18 @@ function renderSelectedFiles(){
 
                 <span>
                     ${
-                        file.type?.startsWith("image/")
+                        file.type?.startsWith(
+                            "image/"
+                        )
                             ? "🖼️"
                             : "📄"
                     }
                 </span>
 
                 <span class="file-chip-name">
-                    ${escapeHTML(file.name)}
+                    ${escapeHTML(
+                        file.name
+                    )}
                 </span>
 
                 <button
@@ -3188,7 +3285,6 @@ function renderSelectedFiles(){
             `;
 
             area.appendChild(chip);
-
         }
     );
 }
@@ -3217,20 +3313,26 @@ $("fileInput").addEventListener(
 
         try{
 
-            for(const file of files){
+            for(
+                const file of files
+            ){
 
                 const duplicate =
                     selectedFiles.some(
                         item =>
-                            item.name === file.name &&
-                            item.size === file.size
+                            item.name ===
+                                file.name &&
+                            item.size ===
+                                file.size
                     );
 
                 if(duplicate)
                     continue;
 
                 const prepared =
-                    await prepareFile(file);
+                    await prepareFile(
+                        file
+                    );
 
                 selectedFiles.push(
                     prepared
@@ -3246,11 +3348,9 @@ $("fileInput").addEventListener(
                 "Erro ao carregar arquivo.",
                 "error"
             );
-
         }
 
         event.target.value = "";
-
     }
 );
 
@@ -3284,8 +3384,16 @@ async function send(){
         return;
     }
 
+    /*
+     * IMPORTANTE:
+     * Copiamos os arquivos ANTES de limpar
+     * selectedFiles.
+     */
+    const filesForAI =
+        [...selectedFiles];
+
     const attachments =
-        selectedFiles.map(
+        filesForAI.map(
             file => {
 
                 const result = {
@@ -3301,11 +3409,31 @@ async function send(){
 
                     sizeText:
                         file.sizeText
-
                 };
 
+                /*
+                 * Mantemos o conteúdo dos arquivos
+                 * de código para a IA.
+                 */
                 if(
-                    file.type?.startsWith("image/")
+                    !file.type?.startsWith(
+                        "image/"
+                    )
+                ){
+
+                    result.text =
+                        file.text || "";
+                }
+
+                /*
+                 * Imagens precisam do Data URL
+                 * para o preview e podem ser
+                 * enviadas ao backend.
+                 */
+                if(
+                    file.type?.startsWith(
+                        "image/"
+                    )
                 ){
 
                     result.data =
@@ -3328,25 +3456,53 @@ async function send(){
 
     const userHistoryItem = {
 
-        role:"user",
+        role:
+            "user",
 
         content:
             displayText,
 
         attachments:
             attachments.map(
-                file => ({
-                    name:
-                        file.name,
-                    type:
-                        file.type,
-                    size:
-                        file.size,
-                    sizeText:
-                        file.sizeText
-                })
-            )
+                file => {
 
+                    const saved = {
+
+                        name:
+                            file.name,
+
+                        type:
+                            file.type,
+
+                        size:
+                            file.size,
+
+                        sizeText:
+                            file.sizeText
+                    };
+
+                    /*
+                     * Salva código/texto
+                     * no histórico.
+                     */
+                    if(
+                        file.text
+                    ){
+
+                        saved.text =
+                            file.text;
+                    }
+
+                    /*
+                     * Não salvamos Data URL
+                     * de imagem no histórico
+                     * para evitar estourar
+                     * o tamanho do banco.
+                     */
+
+                    return saved;
+                }
+            )
     };
 
     history.push(
@@ -3377,26 +3533,28 @@ async function send(){
 
     try{
 
-        /*
-         * IMPORTANTE:
-         * O apiBase precisa apontar para o servidor
-         * Node.js quando o site estiver online.
-         *
-         * Exemplo:
-         * https://seu-backend.onrender.com
-         */
-
         const apiBase =
             String(
                 C.apiBase || ""
-            ).replace(/\/+$/,"");
+            ).replace(
+                /\/+$/,
+                ""
+            );
+
+        if(!apiBase){
+
+            throw new Error(
+                "apiBase não configurado no config.js."
+            );
+        }
 
         const response =
             await fetch(
                 apiBase +
                 "/api/chat",
                 {
-                    method:"POST",
+                    method:
+                        "POST",
 
                     headers:{
                         "Content-Type":
@@ -3413,18 +3571,26 @@ async function send(){
                     body:
                         JSON.stringify({
 
+                            /*
+                             * Histórico enviado
+                             * para manter contexto.
+                             */
                             messages:
                                 history,
 
+                            /*
+                             * Mensagem atual.
+                             */
                             currentMessage:{
 
-                                text,
+                                text:
+
+                                    text,
 
                                 files:
-                                    selectedFiles
 
+                                    filesForAI
                             }
-
                         }),
 
                     signal:
@@ -3442,7 +3608,6 @@ async function send(){
         }catch{
 
             data = null;
-
         }
 
         if(!response.ok){
@@ -3460,7 +3625,7 @@ async function send(){
             );
         }
 
-        typing.remove();
+        typing?.remove();
 
         addMessage(
             "IA",
@@ -3469,21 +3634,26 @@ async function send(){
 
         history.push({
 
-            role:"assistant",
+            role:
+                "assistant",
 
             content:
                 data.reply
-
         });
 
         await saveChat();
+
+        setConnectionStatus(
+            true
+        );
 
     }catch(error){
 
         typing?.remove();
 
         if(
-            error?.name === "AbortError"
+            error?.name ===
+            "AbortError"
         ){
 
             addMessage(
@@ -3498,7 +3668,9 @@ async function send(){
                 error
             );
 
-            setConnectionStatus(false);
+            setConnectionStatus(
+                false
+            );
 
             addMessage(
                 "IA",
@@ -3522,7 +3694,6 @@ async function send(){
         $("sendButton")
             .classList
             .remove("hidden");
-
     }
 }
 
@@ -3535,9 +3706,11 @@ function stopGeneration(){
     if(controller){
 
         try{
-            controller.abort();
-        }catch{}
 
+            controller.abort();
+
+        }catch{}
+        
         controller = null;
     }
 
@@ -3591,9 +3764,7 @@ $("input").addEventListener(
             event.preventDefault();
 
             send();
-
         }
-
     }
 );
 
@@ -3664,7 +3835,6 @@ function crc16(value){
 
                 crc =
                     crc << 1;
-
             }
 
             crc &=
@@ -3682,8 +3852,9 @@ function tlv(id,value){
 
     return (
         id +
-        String(value.length)
-            .padStart(2,"0") +
+        String(
+            value.length
+        ).padStart(2,"0") +
         value
     );
 }
@@ -3884,7 +4055,8 @@ function showPix(plan){
 
     if(
         window.QRCode &&
-        typeof QRCode.toCanvas === "function"
+        typeof QRCode.toCanvas ===
+            "function"
     ){
 
         QRCode.toCanvas(
@@ -3901,7 +4073,6 @@ function showPix(plan){
                         "Erro QR Code:",
                         error
                     );
-
             }
         );
     }
@@ -3927,9 +4098,11 @@ async function copyPix(){
 
     try{
 
-        await navigator.clipboard.writeText(
-            payload
-        );
+        await navigator
+            .clipboard
+            .writeText(
+                payload
+            );
 
         showToast(
             "Pix Copia e Cola copiado!",
@@ -3959,9 +4132,7 @@ $("plansModal").addEventListener(
         ){
 
             closePlans();
-
         }
-
     }
 );
 
@@ -3981,23 +4152,32 @@ document.addEventListener(
                 ?.classList
                 .remove("open");
         }
-
     }
+);
+
+/* =====================================================
+   CONNECTION
+===================================================== */
+
+window.addEventListener(
+    "online",
+    () =>
+        setConnectionStatus(
+            true
+        )
+);
+
+window.addEventListener(
+    "offline",
+    () =>
+        setConnectionStatus(
+            false
+        )
 );
 
 /* =====================================================
    START
 ===================================================== */
-
-window.addEventListener(
-    "online",
-    () => setConnectionStatus(true)
-);
-
-window.addEventListener(
-    "offline",
-    () => setConnectionStatus(false)
-);
 
 boot();
 
