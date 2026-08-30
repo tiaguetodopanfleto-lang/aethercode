@@ -3,7 +3,7 @@ window.AETHERCODE_CONFIG = {
 
     supabaseAnonKey: 'SUA_CHAVE_PUBLICA',
 
-    apiBase: '',
+    apiBase: 'https://aethercode-qwhy.onrender.com',
 
     ownerEmails: [
         'tpdasilva@icloud.com',
