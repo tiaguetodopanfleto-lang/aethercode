@@ -174,10 +174,12 @@ function addCurrentFiles(parts, files) {
                 }
             });
 
-            parts.push({
-                text:
-                    `Analise a imagem "${name}" e considere seu conteúdo para responder ao usuário.`
-            });
+                parts.push({
+                    text:
+                        "Analise a imagem \"" +
+                        name +
+                        "\" e considere seu conteúdo para responder ao usuário."
+                });
 
             continue;
         }
