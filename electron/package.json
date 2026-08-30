@@ -1,0 +1,1 @@
+{"name":"aethercode-ai-desktop","version":"2.0.0","main":"main.js","private":true,"scripts":{"start":"electron .","build":"electron-builder --win nsis"},"devDependencies":{"electron":"^37.0.0","electron-builder":"^26.0.0"}}
