@@ -3447,7 +3447,7 @@ $("bannerFileInput").addEventListener(
     }
 );
 
-async function uploadToBucket(bucket,file){
+async function uploadToBucket(bucket, file){
 
     if(!sb || !session)
         throw new Error("Sem sessão.");
@@ -3456,16 +3456,20 @@ async function uploadToBucket(bucket,file){
         (file.name.split(".").pop() || "png")
             .toLowerCase();
 
+    const fileName =
+        bucket === "avatars"
+            ? `avatar.${ext}`
+            : `banner.${ext}`;
+
     const path =
-        `${session.user.id}/${Date.now()}.${ext}`;
+        `${session.user.id}/${fileName}`;
 
     const {error: uploadError} =
         await sb.storage
             .from(bucket)
-            .upload(path,file,{
+            .upload(path, file, {
 
-                upsert:
-                    true,
+                upsert: true,
 
                 contentType:
                     file.type ||
@@ -3480,7 +3484,12 @@ async function uploadToBucket(bucket,file){
             .from(bucket)
             .getPublicUrl(path);
 
-    return data?.publicUrl || null;
+    if(!data?.publicUrl)
+        throw new Error(
+            "Não foi possível obter a URL da imagem."
+        );
+
+    return `${data.publicUrl}?t=${Date.now()}`;
 }
 
 async function saveProfile(){
